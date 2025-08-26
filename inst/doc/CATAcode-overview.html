@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>CATAcode Overview</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">CATAcode Overview</h1>
+
+
+
+<p>C:061Z6f1053a24f7-overview.R</p>
+<div id="introduction-to-catacode" class="section level1">
+<h1>Introduction to <code>CATAcode</code></h1>
+<p>Check-all-that-apply (CATA) items present numerous methodological
+challenges that can hinder the validity of survey research. In
+particular, accurately measuring, reporting, interpreting, and
+evaluating participants’ identities is essential.</p>
+<p><code>CATAcode</code> is an R package designed to assist researchers
+in exploring CATA responses for summary descriptives and and preparing
+CATA items for statistical modeling. Applying this tool to
+cross-sectional and longitudinal data can help enhance the
+generalizability, transparency, and reproducibility of your
+research.</p>
+<p>In surveys, a CATA item can also be structured as a series of forced
+choice dichotomous items (e.g., Yes/No). For instance, for an evaluation
+of their program graduate students were asked, <em>“Have you experienced
+any of these barriers to conducting research?”</em>, with 5 options of:
+lack of funding, lack of mentorship, lack of research infrastructure
+(e.g., software), lack of time capacity, and other barriers. The survey
+could either instruct responses to CATA or to explicitly select Yes or
+No to each option. The <code>CATAcode</code> package is suitable for
+analyzing data from both CATA and forced choice formats.</p>
+<p>This vignette demonstrates how to use the <code>CATAcode</code>
+package to:</p>
+<ul>
+<li>Identify participants who endorse multiple categories</li>
+<li>Generate tables showing every endorsement combination in the
+data</li>
+<li>Apply various strategies for merging and prioritizing
+categories</li>
+<li>Handle both cross-sectional and longitudinal data</li>
+</ul>
+</div>
+<div id="the-catacode-workflow" class="section level1">
+<h1>The <code>CATAcode</code> Workflow</h1>
+<ol style="list-style-type: decimal">
+<li>Import &amp; wrangle raw wider format data into longer format using
+the cata_prep() function.</li>
+<li>Explore all response combinations or category counts to understand
+complexity.</li>
+<li>Code new variables with principled strategies (multiple, priority,
+mode).</li>
+<li>Document &amp; export metadata, tables, and optional
+visualizations.</li>
+</ol>
+<div id="import-and-wrangle-data" class="section level2">
+<h2>1. Import and Wrangle Data</h2>
+<p>You can install the released version of <code>CATAcode</code> from
+CRAN with:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;CATAcode&quot;</span>)</span></code></pre></div>
+<p>C:061Z6f1053a24f7-overview.R</p>
+<p>Or the development version from GitHub:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;knickodem/CATAcode&quot;</span>)</span></code></pre></div>
+<p>C:061Z6f1053a24f7-overview.R</p>
+<p>Once installed, load the package:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(CATAcode)</span></code></pre></div>
+<p>C:061Z6f1053a24f7-overview.R</p>
+<div id="data-preparation" class="section level3">
+<h3>Data Preparation</h3>
+<p>Before using the main <code>cata_code()</code> function, the data
+must be prepared. The <code>cata_prep()</code> function helps reshape
+your data from wider to longer format.</p>
+<p><strong>Requirements</strong></p>
+<p>Your dataset should include:</p>
+<ul>
+<li>An ID variable</li>
+<li>A set of variables (i.e., columns) indicating the
+check-all-that-apply categories to examine. All variables are expected
+to be dichotomous (e.g., 1/0, Yes/No, TRUE/FALSE) where the value
+signifying endorsement is consistent across all of the variables.</li>
+<li>For longitudinal data, a time variable (e.g., Wave)</li>
+</ul>
+<p><strong>Example Data</strong></p>
+<p>The <code>CATAcode</code> package includes a longitudinal dataset
+comprised of CATA responses to 7 race/ethnicity identities from 6,442
+students at four time points. For each identity category/column, 1 =
+Selected and <code>NA</code> = Not selected. To load and view the first
+few rows of the dataset:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;sources_race&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">head</span>(sources_race)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 9</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt;   ID     Wave Black Native_American Asian Hispanic Multiracial Pacific_Islander</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;            &lt;dbl&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; 1 10002     1    NA              NA    NA        1          NA               NA</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; 2 10005     1    NA              NA    NA        1          NA               NA</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; 3 10006     1    NA              NA    NA        1          NA               NA</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; 4 10007     1    NA              NA    NA        1          NA               NA</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; 5 10009     1    NA              NA    NA        1          NA               NA</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; 6 10010     1    NA              NA    NA       NA          NA               NA</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; # ℹ 1 more variable: White &lt;dbl&gt;</span></span></code></pre></div>
+<p>C:061Z6f1053a24f7-overview.R</p>
+<p>Let’s also create some example cross-sectional (i.e., single
+timepoint) data based on our earlier question to graduate students:
+“Have you experienced any of these barriers to conducting research?” For
+each category, students provide a “Yes” or “No” response.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># Creating a cross-sectional dataset (N = 1000)</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  </span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>n_cross <span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>cross <span class="ot">=</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="at">ID               =</span> <span class="dv">1</span><span class="sc">:</span>n_cross,</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  <span class="at">Funding          =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>), n_cross, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">15</span>, .<span class="dv">85</span>)),</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  <span class="at">Mentorship       =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>), n_cross, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">10</span>, .<span class="dv">90</span>)),</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>  <span class="at">Infrastructure   =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>), n_cross, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">45</span>, .<span class="dv">55</span>)),</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>  <span class="at">Time_Capacity    =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>), n_cross, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">25</span>, .<span class="dv">75</span>)),</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>  <span class="at">Other_Barrier    =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Yes&quot;</span>), n_cross, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(.<span class="dv">80</span>, .<span class="dv">20</span>))</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>  )</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co"># Display the first few rows of the dataset</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="fu">head</span>(cross)</span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="co">#&gt;   ID Funding Mentorship Infrastructure Time_Capacity Other_Barrier</span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co">#&gt; 1  1     Yes        Yes            Yes           Yes            No</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="co">#&gt; 2  2     Yes        Yes            Yes            No           Yes</span></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a><span class="co">#&gt; 3  3     Yes        Yes            Yes           Yes            No</span></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="co">#&gt; 4  4      No        Yes            Yes           Yes           Yes</span></span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a><span class="co">#&gt; 5  5      No        Yes            Yes           Yes            No</span></span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a><span class="co">#&gt; 6  6     Yes        Yes             No           Yes            No</span></span></code></pre></div>
+<p>C:061Z6f1053a24f7-overview.R</p>
+<p><strong>Using cata_prep</strong></p>
+<p><code>cata_prep()</code> is the gateway function for every workflow
+in <code>cata_code()</code>.</p>
+<p>Its jobs are to:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Reshape</strong> data from wide to tidy‑long format so the
+downstream <code>cata_code()</code> function can iterate over one row
+per person‑category (or person‑time‑category).</li>
+<li><strong>Standardize</strong> column names (<code>id</code>,
+<code>Category</code>, <code>Response</code>, <code>time</code>) and
+stores them as attributes, eliminating repetitive arguments. You tell
+<code>cata_prep()</code> which columns hold the IDs, which columns hold
+the categories, and how you want to name the two columns in the long
+format data that contain the categories and endorsed/not endorsed
+responses.</li>
+</ol>
+<p><strong><code>cata_prep()</code> function arguments:</strong></p>
+<ul>
+<li>data = cross
+<ul>
+<li>Provide the name of the dataset. In our case <em>cross</em> for the
+cross-sectional dataset.</li>
+</ul></li>
+<li>id = ID
+<ul>
+<li>Supply the column that uniquely identifies each respondent. Must be
+unique <em>within each time‑point</em> if you also pass
+<code>time =</code>.</li>
+<li>If your ID column is named something else, e.g. “participant_id”,
+write id = participant_id.</li>
+</ul></li>
+<li>cols = Funding:Other_Barrier
+<ul>
+<li>Tell <code>cata_prep()</code> which columns are the dichotomous CATA
+indicators. In the cross-sectional data, these are the barriers; in the
+longitudinal data, these are the race/ethnicity identities.</li>
+<li>You can:
+<ul>
+<li>Use the tidy‑select range syntax we show here, which grabs every
+column from <code>Funding</code> through <code>Other_Barrier</code>,
+inclusive, in the order they appear in the data frame.</li>
+<li>List them explicitly: cols = c(Black, Native_American, Asian, White,
+Pacific_Islander, Hispanic, Multiracial)</li>
+<li>Or use a tidy‑select helper when applicable: cols =
+starts_with(“race_”)</li>
+</ul></li>
+</ul></li>
+<li>names_to = “Barriers” and values_to = “YN”
+<ul>
+<li>When <code>cata_prep()</code> transforms the data into long format
+it needs to name the resulting two columns storing the cateogry labels
+and participants’ responses to each category, respectively. You have the
+option of providing the names using the <code>names_to</code> argument
+for the categories and <code>values_to</code> argument for the
+responses. By default, <code>cata_prep()</code> uses the names
+“Categories” and “Responses”, respectively.</li>
+</ul></li>
+<li>time = Wave
+<ul>
+<li>For longitudinal data, provide the column indicating the time so
+<code>cata_prep()</code> keeps observations from different time points
+separate.</li>
+</ul></li>
+</ul>
+<p><strong><em>After this call, the new data will be a tidy long
+dataframe with three or four standardized columns: id, Category,
+Response, and time (if supplied).</em></strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Prepare cross-sectional </span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>datacross_prep <span class="ot">&lt;-</span> <span class="fu">cata_prep</span>(<span class="at">data =</span> cross, <span class="at">id =</span> ID, <span class="at">cols =</span> Funding<span class="sc">:</span>Other_Barrier, <span class="at">names_to =</span> <span class="st">&quot;Barriers&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;YN&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Prepare longitudinal </span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>datalong_prep <span class="ot">&lt;-</span> <span class="fu">cata_prep</span>(<span class="at">data =</span> sources_race, <span class="at">id =</span> ID, <span class="at">cols =</span> <span class="fu">c</span>(Asian, Black<span class="sc">:</span>White), <span class="at">time =</span> Wave)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># Display the first few rows of the prepared data</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="fu">head</span>(datacross_prep)</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 3</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt;      ID Barriers       YN   </span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 1     1 Funding        Yes  </span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 2     1 Mentorship     Yes  </span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 3     1 Infrastructure Yes  </span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; 4     1 Time_Capacity  Yes  </span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co">#&gt; 5     1 Other_Barrier  No   </span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">#&gt; 6     2 Funding        Yes</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="fu">head</span>(datalong_prep)</span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 4</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a><span class="co">#&gt;   ID     Wave Category         Response</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt;</span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a><span class="co">#&gt; 1 10002     1 Asian                  NA</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a><span class="co">#&gt; 2 10002     1 Black                  NA</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a><span class="co">#&gt; 3 10002     1 Native_American        NA</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="co">#&gt; 4 10002     1 Hispanic                1</span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="co">#&gt; 5 10002     1 Multiracial            NA</span></span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a><span class="co">#&gt; 6 10002     1 Pacific_Islander       NA</span></span></code></pre></div>
+<p>C:061Z6f1053a24f7-overview.R</p>
+</div>
+</div>
+<div id="explore-all-response-combinations" class="section level2">
+<h2>2. Explore All Response Combinations</h2>
+<p>The first step when analyzing CATA data is exploring all combinations
+of categories present in the data. The <code>cata_code()</code> function
+with <code>approach = &quot;all&quot;</code> helps identify every unique category
+combination. For longitudinal data, <code>approach = &quot;counts&quot;</code>
+provides a summary of how many times each participant endorsed each
+category across time.</p>
+<p><strong><code>cata_code()</code> function arguments:</strong></p>
+<ul>
+<li>data = datacross_prep (or datalong_prep)
+<ul>
+<li>The tidy‑long format dataframe returned by
+<code>cata_prep()</code>.</li>
+</ul></li>
+<li>id = ID
+<ul>
+<li>Column that uniquely identifies each respondent. Must match the
+<code>id</code> we specified in <code>cata_prep()</code>, which was
+<code>ID</code> for both the cross-sectional and longitudinal
+datasets.</li>
+</ul></li>
+<li>categ = Barriers
+<ul>
+<li>The column that stores the category labels. For the cross-sectional
+data, we named this column “Barriers” in <code>cata_prep()</code>. For
+the longitudinal data, we relied on the <code>cata_prep()</code> default
+name of “Category”.</li>
+</ul></li>
+<li>resp = YN
+<ul>
+<li>The column that stores the response codes (e.g., Yes/No). For the
+cross-sectional data, we named this column “YN” in
+<code>cata_prep()</code>. For the longitudinal data, we relied on the
+<code>cata_prep()</code> default name of “Response”.</li>
+</ul></li>
+<li>approach = “all”
+<ul>
+<li>“all” will return <strong>every unique combination</strong> of
+endorsed categories for each person‑wave. Useful for an initial scan of
+response complexity.</li>
+<li>“counts” is only for longitudinal data, which we show below, and
+returns a <strong>count table</strong> of how many times each
+participant endorsed each category across time points.</li>
+<li>We will discuss the other options of “multiple”, “priority”, and
+“mode” in a moment.</li>
+</ul></li>
+<li>endorse = “Yes”
+<ul>
+<li>The value in <code>resp</code> indicating endorsement of the
+category. For the cross-sectional data, the value is “Yes”; in the
+longitudinal data, the value is 1.</li>
+</ul></li>
+<li>new.name = (optional)
+<ul>
+<li>Name for the newly created variable when <code>approach</code> =
+“all”, “multiple”, “priority”, or “mode”. For “counts” a wide
+participant‑level dat frame is returned, so <code>new.name</code> is
+ignored.</li>
+</ul></li>
+<li>sep = “-”
+<ul>
+<li>Only used for <code>approach = &quot;all&quot;</code> to separate each
+endorsed category when they are combined into a single variable.</li>
+</ul></li>
+</ul>
+<p><strong>Explore all combinations in cross-sectional data</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Explore all combinations in cross-sectional data</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>cross_all <span class="ot">&lt;-</span> <span class="fu">cata_code</span>(<span class="at">data =</span> datacross_prep,</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                      <span class="at">id =</span> ID,</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>                      <span class="at">categ =</span> Barriers,</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>                      <span class="at">resp =</span> YN,</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>                      <span class="at">approach =</span> <span class="st">&quot;all&quot;</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>                      <span class="at">endorse =</span> <span class="st">&quot;Yes&quot;</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>                      <span class="at">new.name =</span> <span class="st">&quot;Combinations&quot;</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>                      <span class="at">sep =</span> <span class="st">&quot;-&quot;</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co"># Display the result</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="fu">head</span>(cross_all)</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 2</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a><span class="co">#&gt;      ID Combinations                                         </span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;                                                </span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a><span class="co">#&gt; 1     1 Funding-Mentorship-Infrastructure-Time_Capacity      </span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="co">#&gt; 2     2 Funding-Mentorship-Infrastructure-Other_Barrier      </span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="co">#&gt; 3     3 Funding-Mentorship-Infrastructure-Time_Capacity      </span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co">#&gt; 4     4 Mentorship-Infrastructure-Time_Capacity-Other_Barrier</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co">#&gt; 5     5 Mentorship-Infrastructure-Time_Capacity              </span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a><span class="co">#&gt; 6     6 Funding-Mentorship-Time_Capacity</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co"># Count the frequency of each combination</span></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="fu">table</span>(cross_all<span class="sc">$</span>Combinations)</span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">#&gt;                                                       Funding </span></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co">#&gt;                                                            12 </span></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="co">#&gt;                                        Funding-Infrastructure </span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co">#&gt;                                                            11 </span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a><span class="co">#&gt;                          Funding-Infrastructure-Other_Barrier </span></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a><span class="co">#&gt;                                                             1 </span></span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a><span class="co">#&gt;                          Funding-Infrastructure-Time_Capacity </span></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a><span class="co">#&gt;                                                            18 </span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="co">#&gt;            Funding-Infrastructure-Time_Capacity-Other_Barrier </span></span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a><span class="co">#&gt;                                                             5 </span></span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a><span class="co">#&gt;                                            Funding-Mentorship </span></span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a><span class="co">#&gt;                                                            72 </span></span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a><span class="co">#&gt;                             Funding-Mentorship-Infrastructure </span></span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a><span class="co">#&gt;                                                            97 </span></span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a><span class="co">#&gt;               Funding-Mentorship-Infrastructure-Other_Barrier </span></span>
+<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a><span class="co">#&gt;                                                            27 </span></span>
+<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a><span class="co">#&gt;               Funding-Mentorship-Infrastructure-Time_Capacity </span></span>
+<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a><span class="co">#&gt;                                                           259 </span></span>
+<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a><span class="co">#&gt; Funding-Mentorship-Infrastructure-Time_Capacity-Other_Barrier </span></span>
+<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a><span class="co">#&gt;                                                            57 </span></span>
+<span id="cb7-46"><a href="#cb7-46" tabindex="-1"></a><span class="co">#&gt;                              Funding-Mentorship-Other_Barrier </span></span>
+<span id="cb7-47"><a href="#cb7-47" tabindex="-1"></a><span class="co">#&gt;                                                             7 </span></span>
+<span id="cb7-48"><a href="#cb7-48" tabindex="-1"></a><span class="co">#&gt;                              Funding-Mentorship-Time_Capacity </span></span>
+<span id="cb7-49"><a href="#cb7-49" tabindex="-1"></a><span class="co">#&gt;                                                           213 </span></span>
+<span id="cb7-50"><a href="#cb7-50" tabindex="-1"></a><span class="co">#&gt;                Funding-Mentorship-Time_Capacity-Other_Barrier </span></span>
+<span id="cb7-51"><a href="#cb7-51" tabindex="-1"></a><span class="co">#&gt;                                                            51 </span></span>
+<span id="cb7-52"><a href="#cb7-52" tabindex="-1"></a><span class="co">#&gt;                                         Funding-Other_Barrier </span></span>
+<span id="cb7-53"><a href="#cb7-53" tabindex="-1"></a><span class="co">#&gt;                                                             1 </span></span>
+<span id="cb7-54"><a href="#cb7-54" tabindex="-1"></a><span class="co">#&gt;                                         Funding-Time_Capacity </span></span>
+<span id="cb7-55"><a href="#cb7-55" tabindex="-1"></a><span class="co">#&gt;                                                            20 </span></span>
+<span id="cb7-56"><a href="#cb7-56" tabindex="-1"></a><span class="co">#&gt;                           Funding-Time_Capacity-Other_Barrier </span></span>
+<span id="cb7-57"><a href="#cb7-57" tabindex="-1"></a><span class="co">#&gt;                                                             2 </span></span>
+<span id="cb7-58"><a href="#cb7-58" tabindex="-1"></a><span class="co">#&gt;                                                Infrastructure </span></span>
+<span id="cb7-59"><a href="#cb7-59" tabindex="-1"></a><span class="co">#&gt;                                                             3 </span></span>
+<span id="cb7-60"><a href="#cb7-60" tabindex="-1"></a><span class="co">#&gt;                                  Infrastructure-Other_Barrier </span></span>
+<span id="cb7-61"><a href="#cb7-61" tabindex="-1"></a><span class="co">#&gt;                                                             1 </span></span>
+<span id="cb7-62"><a href="#cb7-62" tabindex="-1"></a><span class="co">#&gt;                                  Infrastructure-Time_Capacity </span></span>
+<span id="cb7-63"><a href="#cb7-63" tabindex="-1"></a><span class="co">#&gt;                                                             5 </span></span>
+<span id="cb7-64"><a href="#cb7-64" tabindex="-1"></a><span class="co">#&gt;                                                    Mentorship </span></span>
+<span id="cb7-65"><a href="#cb7-65" tabindex="-1"></a><span class="co">#&gt;                                                            12 </span></span>
+<span id="cb7-66"><a href="#cb7-66" tabindex="-1"></a><span class="co">#&gt;                                     Mentorship-Infrastructure </span></span>
+<span id="cb7-67"><a href="#cb7-67" tabindex="-1"></a><span class="co">#&gt;                                                            13 </span></span>
+<span id="cb7-68"><a href="#cb7-68" tabindex="-1"></a><span class="co">#&gt;                       Mentorship-Infrastructure-Other_Barrier </span></span>
+<span id="cb7-69"><a href="#cb7-69" tabindex="-1"></a><span class="co">#&gt;                                                             5 </span></span>
+<span id="cb7-70"><a href="#cb7-70" tabindex="-1"></a><span class="co">#&gt;                       Mentorship-Infrastructure-Time_Capacity </span></span>
+<span id="cb7-71"><a href="#cb7-71" tabindex="-1"></a><span class="co">#&gt;                                                            34 </span></span>
+<span id="cb7-72"><a href="#cb7-72" tabindex="-1"></a><span class="co">#&gt;         Mentorship-Infrastructure-Time_Capacity-Other_Barrier </span></span>
+<span id="cb7-73"><a href="#cb7-73" tabindex="-1"></a><span class="co">#&gt;                                                             6 </span></span>
+<span id="cb7-74"><a href="#cb7-74" tabindex="-1"></a><span class="co">#&gt;                                      Mentorship-Time_Capacity </span></span>
+<span id="cb7-75"><a href="#cb7-75" tabindex="-1"></a><span class="co">#&gt;                                                            53 </span></span>
+<span id="cb7-76"><a href="#cb7-76" tabindex="-1"></a><span class="co">#&gt;                        Mentorship-Time_Capacity-Other_Barrier </span></span>
+<span id="cb7-77"><a href="#cb7-77" tabindex="-1"></a><span class="co">#&gt;                                                             9 </span></span>
+<span id="cb7-78"><a href="#cb7-78" tabindex="-1"></a><span class="co">#&gt;                                                 Time_Capacity </span></span>
+<span id="cb7-79"><a href="#cb7-79" tabindex="-1"></a><span class="co">#&gt;                                                             4 </span></span>
+<span id="cb7-80"><a href="#cb7-80" tabindex="-1"></a><span class="co">#&gt;                                   Time_Capacity-Other_Barrier </span></span>
+<span id="cb7-81"><a href="#cb7-81" tabindex="-1"></a><span class="co">#&gt;                                                             1</span></span></code></pre></div>
+<p>C:061Z6f1053a24f7-overview.R</p>
+<p><strong>Explore endorsement counts over time in longitudinal
+data</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Explore all combinations in cross-sectional data</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co"># Get counts across waves</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>long_counts <span class="ot">&lt;-</span> <span class="fu">cata_code</span>(<span class="at">data =</span> datalong_prep,</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>                         <span class="at">id =</span> ID,</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>                         <span class="at">categ =</span> Category,</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>                         <span class="at">resp =</span> Response,</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>                         <span class="at">approach =</span> <span class="st">&quot;counts&quot;</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>                         <span class="at">endorse =</span> <span class="dv">1</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co"># Display the result</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="fu">head</span>(long_counts)</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 3</span></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co">#&gt; # Groups:   ID [5]</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co">#&gt;   ID     Category        n_time</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;            &lt;int&gt;</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a><span class="co">#&gt; 1 100003 White                4</span></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#&gt; 2 100006 White                1</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#&gt; 3 100009 Asian                1</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="co">#&gt; 4 100010 White                2</span></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#&gt; 5 100011 Native_American      2</span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#&gt; 6 100011 White                1</span></span></code></pre></div>
+<p>C:061Z6f1053a24f7-overview.R</p>
+</div>
+<div id="coding-a-new-variable-for-statistical-analysis" class="section level2">
+<h2>3. Coding A New Variable for Statistical Analysis</h2>
+<p><code>CATAcode</code> offers several approaches with the
+<code>cata_code()</code> function to prepare CATA data for statistical
+modeling:</p>
+<ul>
+<li>“multiple” - combine anyone endorsing ≥ 2 categories into a single
+catch‑all group (e.g., “Multiracial”).</li>
+<li>“priority” - assign a participant to the first category in a
+user‑supplied priority list that they endorsed.</li>
+<li>“mode” - longitudinal only; assign the category endorsed most often
+across waves (ties are handled like “multiple” or decided by priority if
+supplied).</li>
+</ul>
+<p><strong>The “multiple” Approach</strong></p>
+<p>The “multiple” approach automatically combines individuals who have
+reported <strong>two or more categories</strong> into the same
+group.</p>
+<p>A new argument to name the new category:</p>
+<ul>
+<li>multi.name = “Multiple”
+<ul>
+<li>What to call the catch‑all group of people who checked 2+
+boxes.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Apply the &quot;multiple&quot; approach</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>cross_multiple <span class="ot">&lt;-</span> <span class="fu">cata_code</span>(<span class="at">data =</span> datacross_prep,</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>                            <span class="at">id =</span> ID,</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>                            <span class="at">categ =</span> Barriers,</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>                            <span class="at">resp =</span> YN,</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>                            <span class="at">approach =</span> <span class="st">&quot;multiple&quot;</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>                            <span class="at">endorse =</span> <span class="st">&quot;Yes&quot;</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>                            <span class="at">new.name =</span> <span class="st">&quot;Barrier&quot;</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>                            <span class="at">multi.name =</span> <span class="st">&quot;Multiple&quot;</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a><span class="co"># Display the results</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="fu">table</span>(cross_multiple<span class="sc">$</span>Barrier)</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="co">#&gt;        Funding Infrastructure     Mentorship       Multiple  Time_Capacity </span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="co">#&gt;             12              3             12            968              4</span></span></code></pre></div>
+<p>C:061Z6f1053a24f7-overview.R</p>
+<p><strong>The “priority” Approach</strong></p>
+<p>In our example the vast majority of students selected two or more
+categories and were combined into the Multiple category. Although this
+informs the graduate program that most students experience multiple
+barriers to conducting research, it provides little information for
+actionable changes. In contrast, the “priority” approach allows us to
+<strong>prioritize specific categories</strong> of interest. For
+instance, the graduate program might have a particular interest
+improving mentorship of graduate researchers and investing in research
+infrastructure.</p>
+<p>A new argument to list the priority categories:</p>
+<ul>
+<li>priority = c(“Mentorship”, “Infrastructure”)
+<ul>
+<li>Vector of category labels in <strong>descending priority
+order</strong>. A participant is assigned to the first category in this
+list that they endorsed. If they endorsed none of the priority
+categories, they fall back to their single selection (or
+<code>multi.name</code> if they endorsed &gt; 1 non‑priority
+category).</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Apply the &quot;priority&quot; approach</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>cross_priority <span class="ot">&lt;-</span> <span class="fu">cata_code</span>(<span class="at">data =</span> datacross_prep,</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>                            <span class="at">id =</span> ID,</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>                            <span class="at">categ =</span> Barriers,</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>                            <span class="at">resp =</span> YN,</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>                            <span class="at">approach =</span> <span class="st">&quot;priority&quot;</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>                            <span class="at">endorse =</span> <span class="st">&quot;Yes&quot;</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>                            <span class="at">new.name =</span> <span class="st">&quot;Barrier&quot;</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>                            <span class="at">multi.name =</span> <span class="st">&quot;Multiple&quot;</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>                            <span class="at">priority =</span> <span class="fu">c</span>(<span class="st">&quot;Mentorship&quot;</span>, <span class="st">&quot;Infrastructure&quot;</span>))</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a><span class="co"># Display the results</span></span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a><span class="fu">table</span>(cross_priority<span class="sc">$</span>Barrier)</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a><span class="co">#&gt;        Funding Infrastructure     Mentorship       Multiple  Time_Capacity </span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a><span class="co">#&gt;             12             44            915             24              4</span></span></code></pre></div>
+<p>C:061Z6f1053a24f7-overview.R</p>
+<p><strong>The “mode” Approach for Longitudinal Data</strong></p>
+<p>The “mode” approach is designed for longitudinal data, placing
+individuals into the category they endorsed most often across time
+points.</p>
+<p>A new argument to list the name of the wave:</p>
+<ul>
+<li>time = Wave
+<ul>
+<li>Column identifying measurement occasion.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="co"># Apply the &quot;mode&quot; approach</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>long_mode <span class="ot">&lt;-</span> <span class="fu">cata_code</span>(<span class="at">data =</span> datalong_prep,</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>                       <span class="at">id =</span> ID,</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>                       <span class="at">categ =</span> Category,</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>                       <span class="at">resp =</span> Response,</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>                       <span class="at">approach =</span> <span class="st">&quot;mode&quot;</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>                       <span class="at">endorse =</span> <span class="dv">1</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>                       <span class="at">time =</span> Wave,</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>                       <span class="at">new.name =</span> <span class="st">&quot;Race_Ethnicity&quot;</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>                       <span class="at">multi.name =</span> <span class="st">&quot;Multiracial&quot;</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a><span class="co"># Display the results</span></span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a><span class="fu">table</span>(long_mode<span class="sc">$</span>Race_Ethnicity)</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">#&gt;            Asian            Black         Hispanic      Multiracial </span></span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a><span class="co">#&gt;              152              110             2882              777 </span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a><span class="co">#&gt;  Native_American Pacific_Islander            White </span></span>
+<span id="cb11-18"><a href="#cb11-18" tabindex="-1"></a><span class="co">#&gt;               65               22             2434</span></span></code></pre></div>
+<p>C:061Z6f1053a24f7-overview.R</p>
+<p><strong>Combining the “mode” and “priority” Approaches for
+Longitudinal Data</strong></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Combining &quot;mode&quot; with &quot;priority&quot;</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>long_mode_priority <span class="ot">&lt;-</span> <span class="fu">cata_code</span>(<span class="at">data =</span> datalong_prep,</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>                                <span class="at">id =</span> ID,</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>                                <span class="at">categ =</span> Category,</span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>                                <span class="at">resp =</span> Response,</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>                                <span class="at">approach =</span> <span class="st">&quot;mode&quot;</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>                                <span class="at">endorse =</span> <span class="dv">1</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>                                <span class="at">time =</span> Wave,</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>                                <span class="at">new.name =</span> <span class="st">&quot;Race_Ethnicity&quot;</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>                                <span class="at">multi.name =</span> <span class="st">&quot;Multiracial&quot;</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>                                <span class="at">priority =</span> <span class="fu">c</span>(<span class="st">&quot;Black&quot;</span>, <span class="st">&quot;Native_American&quot;</span>))</span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="co"># Display the results</span></span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="fu">table</span>(long_mode_priority<span class="sc">$</span>Race_Ethnicity)</span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="co">#&gt;            Asian            Black         Hispanic      Multiracial </span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="co">#&gt;              146              459             2732              423 </span></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="co">#&gt;  Native_American Pacific_Islander            White </span></span>
+<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="co">#&gt;              347               22             2313</span></span></code></pre></div>
+<p>C:061Z6f1053a24f7-overview.R</p>
+</div>
+<div id="document-export-metadata-tables-and-optional-visualizations." class="section level2">
+<h2>4. Document &amp; Export metadata, tables, and optional
+visualizations.</h2>
+<p>In addition to comparing the frequency tables with the
+<code>table()</code> function, visualizing the distribution of
+categories can help researchers make informed decisions about coding
+strategies. The next version of <code>CATAcode</code> will include
+expanded functionality for creating publication ready tables and
+figures.</p>
+<p>Let’s compare how the response frequencies change with the multiple
+approach and prioritizing mentorship and infrastructure in the
+cross-sectional data.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="co"># Get counts from the coded data frames created earlier</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>counts_multiple <span class="ot">=</span> cross_multiple <span class="sc">|&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  <span class="fu">count</span>(Barrier, <span class="at">name =</span> <span class="st">&quot;Count&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Approach =</span> <span class="st">&quot;Multiple&quot;</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>counts_priority <span class="ot">=</span> cross_priority <span class="sc">|&gt;</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>  <span class="fu">count</span>(Barrier, <span class="at">name =</span> <span class="st">&quot;Count&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Approach =</span> <span class="st">&quot;Priority&quot;</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="co"># Display in a figure</span></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a>cross_plot <span class="ot">=</span> <span class="fu">bind_rows</span>(counts_multiple, counts_priority) <span class="sc">|&gt;</span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Barrier, <span class="sc">-</span>Count), <span class="at">y =</span> Count,</span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>             <span class="at">fill =</span> Approach)) <span class="sc">+</span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">Multiple =</span> <span class="st">&quot;#1F78B4&quot;</span>,</span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a>                               <span class="at">Priority  =</span> <span class="st">&quot;#FB9A99&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Barrier&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>,</span>
+<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Comparing Coding Approaches&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb13-23"><a href="#cb13-23" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span>
+<span id="cb13-24"><a href="#cb13-24" tabindex="-1"></a>cross_plot</span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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" /><!-- -->C:061Z6f1053a24f7-overview.R</p>
+<p>We can also compare the mode approach and the mode with priority
+approach in the longitudinal data.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co"># Get counts from the coded data frames created earlier</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>counts_mode <span class="ot">=</span> long_mode<span class="sc">|&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>  <span class="fu">count</span>(Race_Ethnicity, <span class="at">name =</span> <span class="st">&quot;Count&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Approach =</span> <span class="st">&quot;Mode&quot;</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>counts_mwp <span class="ot">=</span> long_mode_priority <span class="sc">|&gt;</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>  <span class="fu">count</span>(Race_Ethnicity, <span class="at">name =</span> <span class="st">&quot;Count&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Approach =</span> <span class="st">&quot;Mode with Priority&quot;</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="co"># Display in a figure</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>long_plot <span class="ot">=</span> <span class="fu">bind_rows</span>(counts_mode, counts_mwp) <span class="sc">|&gt;</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Race_Ethnicity, <span class="sc">-</span>Count), <span class="at">y =</span> Count,</span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>             <span class="at">fill =</span> Approach)) <span class="sc">+</span></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">Mode =</span> <span class="st">&quot;#1F78B4&quot;</span>,</span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>                               <span class="st">`</span><span class="at">Mode with Priority</span><span class="st">`</span>  <span class="ot">=</span> <span class="st">&quot;#FB9A99&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Race/Ethnicity&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Count&quot;</span>,</span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Comparing Coding Approaches&quot;</span>) <span class="sc">+</span></span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span>
+<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a>long_plot</span></code></pre></div>
+<p><img role="img" src="data:image/png;base64,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" /><!-- -->C:061Z6f1053a24f7-overview.R</p>
+</div>
+</div>
+<div id="recommendations-for-using-catacode" class="section level1">
+<h1>Recommendations for Using CATAcode</h1>
+<ol style="list-style-type: decimal">
+<li>Start by exploring all combinations using the <code>&quot;all&quot;</code> and
+<code>&quot;counts&quot;</code> approaches.</li>
+<li>Retain as much identity nuance as possible where sample size
+allows.</li>
+<li>Document and justify all subjective decisions for merging or
+prioritizing categories.</li>
+<li>Include supplemental tables with all category combinations to
+describe the complete demographic picture.</li>
+<li>Choose coding approaches based on research questions and sample
+characteristics.</li>
+</ol>
+<div id="when-to-use-each-approach" class="section level2">
+<h2>When to Use Each Approach</h2>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="40%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Approach</th>
+<th>Best for</th>
+<th>Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>multiple</code></td>
+<td>Quickly grouping multi‑identity cases</td>
+<td>Obscures data when many participants report multiple identities</td>
+</tr>
+<tr class="even">
+<td><code>priority</code></td>
+<td>Preserving often‑overlooked identities</td>
+<td>Can hide additional endorsed identities</td>
+</tr>
+<tr class="odd">
+<td><code>mode</code></td>
+<td>Longitudinal data where identity fluctuates over time</td>
+<td>Can mask short‑term identity changes</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p><code>CATAcode</code> provides a structured approach to handling CATA
+survey items in a transparent and principled manner. By enhancing the
+precision and inclusivity of data, this package supports more robust
+health and social science research that better reflects the lived
+experiences and health needs of diverse communities. For additional
+information, see the package documentation by typing
+<code>?CATAcode::cata_prep</code> or <code>?CATAcode::cata_code</code>
+in your R console.</p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
