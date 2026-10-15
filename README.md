@@ -1,7 +1,11 @@
 
-# CATAcode <img src="man/figures/logo.PNG" align="right" height="138" alt="" />
+# CATAcode <img src="man/figures/logo.png" align="right" height="138" alt="" />
 
 **Principled Approaches to Coding Check-All-That-Apply Responses**
+
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/CATAcode)](https://cran.r-project.org/package=CATAcode)
+[![metacrandownloads](https://cranlogs.r-pkg.org/badges/CATAcode)](https://cran.r-project.org/package=CATAcode)
+[![metacrandownloads](https://cranlogs.r-pkg.org/badges/grand-total/CATAcode)](https://cran.r-project.org/package=CATAcode)
 
 "Which of the following have happened to you? Check all that apply." 
 

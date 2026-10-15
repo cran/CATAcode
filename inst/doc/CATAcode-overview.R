@@ -11,13 +11,13 @@ library(CATAcode)
 library(dplyr)
 
 ## ----install, eval=F----------------------------------------------------------
-#  install.packages("CATAcode")
+# install.packages("CATAcode")
 
 ## ----dev-install, eval=F------------------------------------------------------
-#  devtools::install_github("knickodem/CATAcode")
+# devtools::install_github("knickodem/CATAcode")
 
 ## ----load, eval=F-------------------------------------------------------------
-#  library(CATAcode)
+# library(CATAcode)
 
 ## ----longitudinal-data--------------------------------------------------------
 data("sources_race")
@@ -44,9 +44,9 @@ head(cross)
 
 
 ## ----include = FALSE, eval=FALSE----------------------------------------------
-#  ## cata_prep() does not currently do these but we could add these features
-#  3. **Validates** that each id–Category combination is unique per time‑point, missing IDs or categories are flagged early.
-#  4. **Adds** those attributes (ID column, time column, endorsement code) as metadata that all other helpers read automatically, keeping the pipeline self‑documenting.
+# ## cata_prep() does not currently do these but we could add these features
+# 3. **Validates** that each id–Category combination is unique per time‑point, missing IDs or categories are flagged early.
+# 4. **Adds** those attributes (ID column, time column, endorsement code) as metadata that all other helpers read automatically, keeping the pipeline self‑documenting.
 
 ## ----cata_prep, echo = TRUE---------------------------------------------------
 # Prepare cross-sectional 
